@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add Item</title>
+</head>
+<body>
+    <form id="myForm">
+        <input type="text" id="txt">
+        <input type="submit">
+    </form>
+    <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+    const myForm = document.querySelector('#myForm');
+    myForm.addEventListener('submit',function(e){
+        e.preventDefault();
+        ipcRenderer.send('item:add',document.querySelector('#txt').value);
+    })
+    </script>
+</body>
+</html>

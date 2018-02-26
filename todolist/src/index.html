@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>待办清单</h1>
+    <ul id="myUl"></ul>
+    <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+    const ul = document.querySelector('#myUl');
+    ipcRenderer.on('item:add',function(e,item){
+      const li = document.createElement('li');
+      li.innerText = item;
+      ul.appendChild(li);
+    })
+    ipcRenderer.on('item:clear', function (e, item) {
+        ul.innerHTML = '';
+    })
+    ul.addEventListener('dblclick',function(e){
+      e.target.remove();
+    })
+    </script>
+  </body>
+</html>
